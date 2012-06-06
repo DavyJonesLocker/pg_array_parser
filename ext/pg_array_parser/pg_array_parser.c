@@ -11,18 +11,42 @@ VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
   array = rb_ary_new();
 
   word_index = 0;
+  int openQuote = 0;
   for(index = 0;index < array_string_length; ++index)
   {
-    if(c_pg_array_string[index] == '{')
-    {
+    if(openQuote && c_pg_array_string[index] != '"') {
+      word[word_index] = c_pg_array_string[index];
+      word_index++;
     }
-    else if(c_pg_array_string[index] == ',' ||
-        c_pg_array_string[index] == '}' )
+    else if (openQuote && c_pg_array_string[index] == '"' && c_pg_array_string[index-1] == '\\')
+    {
+      word[word_index - 1] = '"';
+    } 
+    else if (openQuote && c_pg_array_string[index] == '"' && c_pg_array_string[index-1] != '\\')
     {
       word[word_index] = '\0';
       ruby_word = rb_str_new2(word);
       word_index = 0;
+      openQuote = 0;
       rb_ary_push(array, ruby_word);
+    }
+    else if(c_pg_array_string[index] == '"')
+    {
+      openQuote = 1;
+    }
+    else if(c_pg_array_string[index] == ',' ||
+        c_pg_array_string[index] == '}' )
+    {
+      if(c_pg_array_string[index - 1] != '"')
+      {
+        word[word_index] = '\0';
+        ruby_word = rb_str_new2(word);
+        word_index = 0;
+        rb_ary_push(array, ruby_word);
+      }
+    }
+    else if(c_pg_array_string[index] == '{')
+    {
     }
     else
     {
