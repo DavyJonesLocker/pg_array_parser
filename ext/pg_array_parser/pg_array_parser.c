@@ -28,21 +28,38 @@ VALUE read_array(int *index, char *c_pg_array_string, int *array_string_length, 
   int openQuote = 0;
   for(;(*index) < (*array_string_length); ++(*index))
   {
-    if(!openQuote && c_pg_array_string[*index] == ',' ||
-        c_pg_array_string[*index] == '}' )
+    if(!openQuote && (c_pg_array_string[*index] == ','))
     {
-      if(c_pg_array_string[(*index) - 1] != '"')
+      if(c_pg_array_string[(*index) - 1] != '"' && c_pg_array_string[(*index) - 1] != '}')
       {
         word[word_index] = '\0';
+        if (word_index == 4 && !strcmp(word,"NULL"))
+        {
+          rb_ary_push(array, Qnil);
+        }
+        else
+        {
+          rb_ary_push(array, rb_str_new2(word));
+        }
         word_index = 0;
-        rb_ary_push(array, rb_str_new2(word));
       }
-      if(c_pg_array_string[*index] == '}')
+    }
+    else if(!openQuote && c_pg_array_string[*index] == '}')
+    {
+      if(word_index > 0 && c_pg_array_string[(*index) - 1] != '"')
       {
-        (*index)++;
-        return array;
+        word[word_index] = '\0';
+        if (word_index == 4 && !strcmp(word,"NULL"))
+        {
+          rb_ary_push(array, Qnil);
+        }
+        else
+        {
+          rb_ary_push(array, rb_str_new2(word));
+        }
+        word_index = 0;
       }
-
+      return array;
     }
     else if (openQuote && c_pg_array_string[*index] == '"' && c_pg_array_string[(*index) - 1] == '\\')
     {
@@ -59,7 +76,7 @@ VALUE read_array(int *index, char *c_pg_array_string, int *array_string_length, 
     {
       openQuote = 1;
     }
-    else if(c_pg_array_string[*index] == '{')
+    else if(!openQuote && c_pg_array_string[*index] == '{')
     {
       (*index)++;
       rb_ary_push(array, read_array(index, c_pg_array_string, array_string_length, word));
