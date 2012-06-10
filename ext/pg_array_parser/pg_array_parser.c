@@ -13,8 +13,7 @@ VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
   int array_string_length = RSTRING_LEN(pg_array_string);
   char *word = malloc(sizeof(char) * (array_string_length + 1));
 
-
-  int index = 0;
+  int index = 1;
 
   return read_array(&index, c_pg_array_string, &array_string_length, word);
 
@@ -38,6 +37,12 @@ VALUE read_array(int *index, char *c_pg_array_string, int *array_string_length, 
         word_index = 0;
         rb_ary_push(array, rb_str_new2(word));
       }
+      if(c_pg_array_string[*index] == '}')
+      {
+        (*index)++;
+        return array;
+      }
+
     }
     else if (openQuote && c_pg_array_string[*index] == '"' && c_pg_array_string[(*index) - 1] == '\\')
     {
@@ -56,6 +61,8 @@ VALUE read_array(int *index, char *c_pg_array_string, int *array_string_length, 
     }
     else if(c_pg_array_string[*index] == '{')
     {
+      (*index)++;
+      rb_ary_push(array, read_array(index, c_pg_array_string, array_string_length, word));
     }
     else
     {
