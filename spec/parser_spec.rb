@@ -25,5 +25,13 @@ describe 'PgArrayParser' do
         end
       end
     end
+
+    context 'two dimensional arrays' do
+      context 'no strings' do
+        it 'returns an array of strings with a sub array' do
+          parser.parse_pg_array(%[{1,{2,3},4}]).should eq ['1',['2','3'],'4']
+        end
+      end
+    end
   end
 end
