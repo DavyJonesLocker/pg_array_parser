@@ -4,8 +4,8 @@ require File.expand_path('../lib/pg_array_parser/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Dan McClain"]
   gem.email         = ["git@danseaver.com"]
-  gem.description   = %q{}
-  gem.summary       = %q{}
+  gem.description   = %q{Simple library to parse PostgreSQL arrays into a array of strings}
+  gem.summary       = %q{Converts PostgreSQL array strings into arrays of strings}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)

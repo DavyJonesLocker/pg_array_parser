@@ -1,6 +1,6 @@
 # PgArrayParser
 
-TODO: Write a gem description
+Fast PostreSQL array parsing.
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include the `PgArrayParser` module. Call `PgArrayParser#parse_pg_array`
+method to return a multi-dimensional array of strings from a PostgreSQL
+array value 
+
+## Authors
+
+Dan McClain [twitter](http://twitter.com/_danmcclain) [github](http://github.com/danmcclain)
 
 ## Contributing
 
