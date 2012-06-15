@@ -34,6 +34,7 @@ method.
     # => ["1", ["2", "3"], "4"]
     parser.parse_pg_array '{some,strings that,"May have some ,\'s"}'
     # => ["some", "strings that", "May have some ,'s"]
+
 ## Authors
 
 Dan McClain [twitter](http://twitter.com/_danmcclain) [github](http://github.com/danmcclain)
