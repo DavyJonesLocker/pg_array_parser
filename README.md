@@ -21,19 +21,21 @@ Or install it yourself as:
 Include the `PgArrayParser` module, which provides the `parse_pg_array`
 method.
 
-    class MyPostgresParser
-      include PgArrayParser
-    end
-    
-    parser = MyPostgresParser.new
-    parser.parse_pg_array '{}'
-    # => []
-    parser.parse_pg_array '{1,2,3,4}'
-    # => ["1", "2", "3", "4"]
-    parser.parse_pg_array '{1,{2,3},4}'
-    # => ["1", ["2", "3"], "4"]
-    parser.parse_pg_array '{some,strings that,"May have some ,\'s"}'
-    # => ["some", "strings that", "May have some ,'s"]
+```ruby
+class MyPostgresParser
+  include PgArrayParser
+end
+
+parser = MyPostgresParser.new
+parser.parse_pg_array '{}'
+# => []
+parser.parse_pg_array '{1,2,3,4}'
+# => ["1", "2", "3", "4"]
+parser.parse_pg_array '{1,{2,3},4}'
+# => ["1", ["2", "3"], "4"]
+parser.parse_pg_array '{some,strings that,"May have some ,\'s"}'
+# => ["some", "strings that", "May have some ,'s"]
+```
 
 ## Authors
 
