@@ -1,7 +1,5 @@
 #include <ruby.h>
 
-VALUE PgArrayParser = Qnil;
-
 //Prototypes
 VALUE read_array(int *index, char *string, int length, char *word);
 VALUE parse_pg_array(VALUE self, VALUE pg_array_string);
@@ -115,9 +113,6 @@ VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, c
 }
 
 void Init_pg_array_parser(void) {
-  PgArrayParser = rb_define_module("PgArrayParser");
-  rb_define_method(PgArrayParser, "parse_pg_array", parse_pg_array, 1);
-
+  rb_define_method(rb_define_module("PgArrayParser"), "parse_pg_array", parse_pg_array, 1);
 }
-
 
