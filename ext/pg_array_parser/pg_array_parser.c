@@ -3,7 +3,7 @@
 VALUE PgArrayParser = Qnil;
 
 //Prototypes
-VALUE read_array(int *index, char *string, int *length, char *word);
+VALUE read_array(int *index, char *string, int length, char *word);
 VALUE parse_pg_array(VALUE self, VALUE pg_array_string);
 
 VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
@@ -15,19 +15,19 @@ VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
 
   int index = 1;
 
-  VALUE return_value = read_array(&index, c_pg_array_string, &array_string_length, word);
+  VALUE return_value = read_array(&index, c_pg_array_string, array_string_length, word);
   free(word);
   return return_value;
 }
 
-VALUE read_array(int *index, char *c_pg_array_string, int *array_string_length, char *word)
+VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, char *word)
 {
   // Return value: array
   VALUE array;
   array = rb_ary_new();
   int word_index = 0;
   int openQuote = 0;
-  for(;(*index) < (*array_string_length); ++(*index))
+  for(;(*index) < array_string_length; ++(*index))
   {
     if(!openQuote && (c_pg_array_string[*index] == ','))
     {
