@@ -1,8 +1,7 @@
 #include <ruby.h>
 
-//Prototypes
+//Prototype
 VALUE read_array(int *index, char *string, int length, char *word);
-VALUE parse_pg_array(VALUE self, VALUE pg_array_string);
 
 VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
 
