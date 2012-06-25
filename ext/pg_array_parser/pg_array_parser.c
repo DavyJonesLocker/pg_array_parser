@@ -1,11 +1,11 @@
 #include <ruby.h>
 
-//Prototype
+/* Prototype */
 VALUE read_array(int *index, char *string, int length, char *word);
 
 VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
 
-  //convert to c-string, create a buffer of the same length, as that will be the worst case
+  /* convert to c-string, create a buffer of the same length, as that will be the worst case */
   char *c_pg_array_string = StringValueCStr(pg_array_string);
   int array_string_length = RSTRING_LEN(pg_array_string);
   char *word = malloc(array_string_length + 1);
@@ -19,7 +19,7 @@ VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
 
 VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, char *word)
 {
-  // Return value: array
+  /* Return value: array */
   VALUE array;
   int word_index = 0;
 
