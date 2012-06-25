@@ -8,7 +8,7 @@ VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
   //convert to c-string, create a buffer of the same length, as that will be the worst case
   char *c_pg_array_string = StringValueCStr(pg_array_string);
   int array_string_length = RSTRING_LEN(pg_array_string);
-  char *word = malloc(sizeof(char) * (array_string_length + 1));
+  char *word = malloc(array_string_length + 1);
 
   int index = 1;
 
