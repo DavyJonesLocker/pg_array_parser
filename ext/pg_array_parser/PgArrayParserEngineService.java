@@ -1,4 +1,4 @@
-package com.dockyard.PgArrayParser;
+package pgarrayparser;
 
 import java.lang.Long;
 import java.io.IOException;
@@ -15,11 +15,9 @@ import org.jruby.runtime.ThreadContext;
 import org.jruby.runtime.builtin.IRubyObject;
 import org.jruby.runtime.load.BasicLibraryService;
 
-public class PgArrayParserService implements BasicLibraryService {
-  private Ruby runtime;
+public class PgArrayParserEngineService implements BasicLibraryService {
 
   public boolean basicLoad(Ruby runtime) throws IOException {
-    this.runtime = runtime;
 
     RubyModule pgArrayParser = runtime.defineModule("PgArrayParser");
     RubyClass pgArrayParserEngine = pgArrayParser.defineClassUnder("PgArrayParserEngine", runtime.getObject(), new ObjectAllocator() {
@@ -30,19 +28,5 @@ public class PgArrayParserService implements BasicLibraryService {
 
     pgArrayParserEngine.defineAnnotatedMethods(PgArrayParserEngine.class);
     return true;
-  }
-
-  public class PgArrayParserEngine extends RubyObject {
-    public PgArrayParserEngine(final Ruby runtime, RubyClass rubyClass) {
-      super(runtime, rubyClass);
-    }
-
-    @JRubyMethod
-    public IRubyObject parse_pg_array(IRubyObject value) {
-      RubyArray test = RubyArray.newArray(runtime, 1);
-
-      return test;
-
-    }
   }
 }

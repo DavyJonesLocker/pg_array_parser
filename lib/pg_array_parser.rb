@@ -3,12 +3,13 @@ require File.expand_path('../pg_array_parser', __FILE__)
 module PgArrayParser
   if RUBY_PLATFORM =~ /java/
     require 'jruby'
-    java_import com.dockyard.PgArrayParser
-    com.dockyard.PgArrayParser.PgArrayParserService.new.basicLoad(JRuby.runtime)
+    require File.expand_path('../pg_array_parser.jar', __FILE__)
+    require 'pgArrayParser/pg_array_parser_engine'
 
-    def self.parse_pg_array(value)
+    def parse_pg_array(value)
       @parser ||= PgArrayParserEngine.new
       @parser.parse_pg_array(value)
     end
   end
 end
+
