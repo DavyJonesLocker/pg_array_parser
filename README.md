@@ -1,6 +1,7 @@
 # PgArrayParser
 [![Build Status](http://travis-ci.org/dockyard/easy_auth.png)](http://travis-ci.org/dockyard/pg_array_parser)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dockyard/pg_array_parser)
+
 Fast PostreSQL array parsing.
 ## Installation
 
