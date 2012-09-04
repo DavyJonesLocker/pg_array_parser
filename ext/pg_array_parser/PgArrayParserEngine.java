@@ -59,7 +59,7 @@ import org.jruby.runtime.load.BasicLibraryService;
             {
               if(openQuote == 0 && word.length() == 4 && word.toString().equals("NULL"))
               {
-                array.append(new RubyNil(runtime));
+                array.append(runtime.getNil());
               }
               else
               {
