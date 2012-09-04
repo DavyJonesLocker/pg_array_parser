@@ -18,3 +18,4 @@ tmp
 benchmark.rb
 bin/*
 .rbenv-version
+lib/pg_array_parser.bundle

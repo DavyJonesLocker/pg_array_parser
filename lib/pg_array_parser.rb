@@ -1,5 +1,4 @@
 require File.expand_path('../pg_array_parser/version', __FILE__)
-require File.expand_path('../pg_array_parser', __FILE__)
 
 if RUBY_PLATFORM =~ /java/
   module PgArrayParser
