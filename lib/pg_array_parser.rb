@@ -13,7 +13,7 @@ if RUBY_PLATFORM =~ /java/
   end
 else
   begin
-    require "pg_array_parser/pg_array_parser.#{RbConfig::CONFIG['DLEXT']}"
+    require 'pg_array_parser/pg_array_parser'
   rescue LoadError
     require "pg_array_parser.#{RbConfig::CONFIG['DLEXT']}"
   end
