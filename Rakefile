@@ -10,9 +10,7 @@ if RUBY_PLATFORM =~ /java/
   Rake::JavaExtensionTask.new('pg_array_parser', spec)
 else
   require 'rake/extensiontask'
-  Rake::ExtensionTask.new('pg_array_parser', spec) do |ext|
-    ext.cross_compile = true
-  end
+  Rake::ExtensionTask.new('pg_array_parser', spec)
 end
 
 task :install => :compile
