@@ -1,12 +1,14 @@
 # PgArrayParser
-
+[![Build Status](http://travis-ci.org/dockyard/easy_auth.png)](http://travis-ci.org/dockyard/pg_array_parser)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/dockyard/pg_array_parser)
 Fast PostreSQL array parsing.
-
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'pg_array_parser'
+```ruby
+gem 'pg_array_parser'
+```
 
 And then execute:
 
@@ -39,12 +41,29 @@ parser.parse_pg_array '{some,strings that,"May have some ,\'s"}'
 
 ## Authors
 
-Dan McClain [twitter](http://twitter.com/_danmcclain) [github](http://github.com/danmcclain)
+[Dan McClain](http://github.com/danmcclain) [twitter](http://twitter.com/_danmcclain) 
 
-## Contributing
+## Versioning ##
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+This gem follows [Semantic Versioning](http://semver.org)
+
+## Want to help? ##
+
+Stable branches are created based upon each minor version. Please make
+pull requests to specific branches rather than master.
+
+Please make sure you include tests!
+
+Unles Rails drops support for Ruby 1.8.7 we will continue to use the
+hash-rocket syntax. Please respect this.
+
+Don't use tabs to indent, two spaces are the standard.
+
+## Legal ##
+
+[DockYard](http://dockyard.com), LLC &copy; 2012
+
+[@dockyard](http://twitter.com/dockyard)
+
+[Licensed under the MIT
+license](http://www.opensource.org/licenses/mit-license.php)
