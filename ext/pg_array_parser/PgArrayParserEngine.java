@@ -104,7 +104,7 @@ public class PgArrayParserEngine extends RubyObject {
     private static void addItem( ThreadContext context, RubyArray items, StringBuilder builder, boolean quoted ) {
         String value = builder.toString();
 
-        if ( value.length() == 0 ) {
+        if ( !quoted && value.length() == 0 ) {
             return;
         }
 
