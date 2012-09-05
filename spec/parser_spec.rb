@@ -46,6 +46,11 @@ describe 'PgArrayParser' do
           parser.parse_pg_array(%[{1,"2\\\\",3,4}]).should eq ['1','2\\','3','4']
           parser.parse_pg_array(%[{1,"2\\\\\\",3",4}]).should eq ['1','2\\",3','4']
         end
+
+        it 'returns an array containing empty strings' do
+          parser.parse_pg_array(%[{1,"",3,""}]).should eq ['1', '', '3', '']
+        end
+
       end
     end
 
@@ -73,6 +78,9 @@ describe 'PgArrayParser' do
         end
         it 'returns an array of strings with a sub array and a quoted { and escaped quote' do
           parser.parse_pg_array(%[{1,{"2\\",{3"},4}]).should eq ['1',['2",{3'],'4']
+        end
+        it 'returns an array of strings with a sub array with empty strings' do
+          parser.parse_pg_array(%[{1,{""},4,{""}}]).should eq ['1',[''],'4',['']]
         end
       end
     end
