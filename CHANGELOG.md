@@ -1,3 +1,9 @@
+# 0.0.5
+ * Prevents attempt to build C extension in JRuby
+
+# 0.0.4
+ * Fixes bad release
+
 # 0.0.3
  * Refactored Java to ensure thread safety - [mauricio](https://github.com/mauricio) -
    Merged at [a30aba](https://github.com/dockyard/pg_array_parser/commit/a30aba4885812290f83c693e6b68c697b0dac675)
