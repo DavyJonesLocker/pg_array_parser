@@ -15,7 +15,11 @@ else
   begin
     require 'pg_array_parser/pg_array_parser'
   rescue LoadError
-    require "pg_array_parser.#{RbConfig::CONFIG['DLEXT']}"
+    begin
+      require "pg_array_parser/pg_array_parser.#{RbConfig::CONFIG['DLEXT']}"
+    rescue LoadError
+      require "pg_array_parser.#{RbConfig::CONFIG['DLEXT']}"
+    end
   end
 end
 
