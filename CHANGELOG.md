@@ -1,3 +1,6 @@
+# 0.0.7
+ * Trying to not break the C extension now
+
 # 0.0.6
  * Excludes C extension files in JRuby
 
