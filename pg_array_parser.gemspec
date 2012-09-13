@@ -11,6 +11,8 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   if RUBY_PLATFORM =~ /java/
+    gem.files.delete('ext/pg_array_paser/extconf.rb')
+    gem.files.delete('ext/pg_array_paser/pg_array_parser.c')
     gem.files << 'lib/pg_array_parser.jar'
   else
     gem.extensions    = ['ext/pg_array_parser/extconf.rb']
