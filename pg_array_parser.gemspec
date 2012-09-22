@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
 
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   if RUBY_PLATFORM =~ /java/
+    gem.platform = 'java'
     gem.files << 'ext/pg_array_parser/PgArrayParserEngine.java'
     gem.files << 'ext/pg_array_parser/PgArrayParserEngineService.java'
     gem.files << 'lib/pg_array_parser.jar'

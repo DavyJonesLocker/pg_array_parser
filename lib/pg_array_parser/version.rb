@@ -1,3 +1,3 @@
 module PgArrayParser
-  VERSION = '0.0.8pre2'
+  VERSION = '0.0.8pre3'
 end
