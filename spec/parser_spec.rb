@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 class Parser
@@ -51,6 +52,9 @@ describe 'PgArrayParser' do
           parser.parse_pg_array(%[{1,"",3,""}]).should eq ['1', '', '3', '']
         end
 
+        it 'returns an array containing unicode strings' do
+          parser.parse_pg_array(%[{"Paragraph 399(b)(i) – “valid leave” – meaning"}]).should eq(['Paragraph 399(b)(i) – “valid leave” – meaning'])
+        end
       end
     end
 

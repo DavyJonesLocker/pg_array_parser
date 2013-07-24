@@ -1,7 +1,8 @@
 #include <ruby.h>
+#include <ruby/encoding.h>
 
 /* Prototype */
-VALUE read_array(int *index, char *string, int length, char *word);
+VALUE read_array(int *index, char *string, int length, char *word, rb_encoding *enc);
 
 VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
 
@@ -9,15 +10,16 @@ VALUE parse_pg_array(VALUE self, VALUE pg_array_string) {
   char *c_pg_array_string = StringValueCStr(pg_array_string);
   int array_string_length = RSTRING_LEN(pg_array_string);
   char *word = malloc(array_string_length + 1);
+  rb_encoding *enc = rb_enc_get(pg_array_string);
 
   int index = 1;
 
-  VALUE return_value = read_array(&index, c_pg_array_string, array_string_length, word);
+  VALUE return_value = read_array(&index, c_pg_array_string, array_string_length, word, enc);
   free(word);
   return return_value;
 }
 
-VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, char *word)
+VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, char *word, rb_encoding *enc)
 {
   /* Return value: array */
   VALUE array;
@@ -61,7 +63,7 @@ VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, c
           }
           else
           {
-            rb_ary_push(array, rb_str_new(word, word_index));
+            rb_ary_push(array, rb_enc_str_new(word, word_index, enc));
           }
         }
         if(c == '}')
@@ -79,7 +81,7 @@ VALUE read_array(int *index, char *c_pg_array_string, int array_string_length, c
       else if(c == '{')
       {
         (*index)++;
-        rb_ary_push(array, read_array(index, c_pg_array_string, array_string_length, word));
+        rb_ary_push(array, read_array(index, c_pg_array_string, array_string_length, word, enc));
         escapeNext = 1;
       }
       else
