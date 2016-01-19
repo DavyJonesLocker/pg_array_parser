@@ -1,11 +1,11 @@
 require File.expand_path('../pg_array_parser/version', __FILE__)
 
 if RUBY_PLATFORM =~ /java/
+  require 'jruby'
+  require File.expand_path('../pg_array_parser.jar', __FILE__)
+  Java::pgarrayparser.PgArrayParserEngineService.new.basicLoad JRuby.runtime
+  
   module PgArrayParser
-    require 'jruby'
-    require File.expand_path('../pg_array_parser.jar', __FILE__)
-    require 'pgArrayParser/pg_array_parser_engine'
-
     def parse_pg_array(value)
       @parser ||= PgArrayParserEngine.new
       @parser.parse_pg_array(value)
@@ -22,4 +22,3 @@ else
     end
   end
 end
-
