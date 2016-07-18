@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Simple library to parse PostgreSQL arrays into a array of strings}
   gem.summary       = %q{Converts PostgreSQL array strings into arrays of strings}
   gem.homepage      = "https://github.com/dockyard/pg_array_parser"
+  gem.license       = "MIT"
 
   gem.files         = [ 'CHANGELOG.md',
                         'Gemfile',
